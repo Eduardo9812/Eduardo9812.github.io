@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <label>Ingresa Codigo</label>
+  <button onclick="mostrarInput1()">Sí</button>
+  <button onclick="ocultarInput1()">No</button>
+  <div class="input-container1">
+  <label>Ingresa tus datos:</label>
+  <input type="text" id="datosInput1">
+  <button onclick="guardarDatos1()">Guardar</button>
+  </div>
+
+  <label>Ingresa Cuenta</label>
+  <button onclick="mostrarInput2()">Sí</button>
+  <button onclick="ocultarInput2()">No</button>
+  <div class="cuenta">
+  <label>Ingresa tus datos:</label>
+  <input type="text" id="cuenta">
+  <button onclick="guardarDatos2()">Guardar</button>
+  </div>
+    <table id="tablaDatos">
+    <tr>
+      <th>Codigo</th>
+      <th>Cuenta</th>
+      <th>Parciales</th>
+      <th>Debe</th>
+      <th>Haber</th>
+    </tr>
+  </table>
+  <script>
+function mostrarInput1() {
+  document.querySelector('.input-container1').style.display = 'block';
+}
+
+function ocultarInput1() {
+  document.querySelector('.input-container1').style.display = 'none';
+}
+
+function guardarDatos1() {
+  var datos = document.getElementById('datosInput1').value;
+  console.log('Datos ingresados:', datos);
+
+  // Agregar los datos ingresados a la tabla
+  var tabla = document.getElementById('tablaDatos');
+  var fila = tabla.insertRow();
+  for (var i = 0; i < 1; i++) {
+    var celda = fila.insertCell();
+    celda.textContent = datos;
+  }
+  fila.cells[1].textContent = datos; // Cuenta
+}
+
+function mostrarInput2() {
+  document.querySelector('.cuenta').style.display = 'block';
+}
+
+function ocultarInput2() {
+  document.querySelector('.cuenta').style.display = 'none';
+}
+
+function guardarDatos2() {
+  var cuenta = document.getElementById('cuenta').value;
+  console.log('Datos ingresados:', cuenta);
+
+  // Agregar los datos ingresados a la tabla
+  var tabla = document.getElementById('tablaDatos');
+  var fila = tabla.insertRow();
+  for (var i = 2; i < 3; i++) {
+    var celda = fila.insertCell();
+    celda.textContent = cuenta;
+  }
+  fila.cells[2].textContent = cuenta; // Cuenta
+}
+
+</script>
+ <script src="main.js" charset =utf-8></script>
+</body>
+</html>
