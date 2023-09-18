@@ -1,81 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-      <link rel="stylesheet" href="style.css">
+    <title>Tabla Contable</title>
+    <script>
+        function calcularTotal() {
+            var debeTotal = 0;
+            var haberTotal = 0;
+
+            // Obtener todas las filas de la tabla
+            var filas = document.querySelectorAll("table tbody tr");
+
+            // Iterar a través de las filas y calcular los totales
+            filas.forEach(function (fila) {
+                var debe = parseFloat(fila.querySelector(".debe").value) || 0;
+                var haber = parseFloat(fila.querySelector(".haber").value) || 0;
+
+                debeTotal += debe;
+                haberTotal += haber;
+            });
+
+            // Mostrar los totales en los campos correspondientes
+            document.getElementById("totalDebe").textContent = debeTotal.toFixed(2);
+            document.getElementById("totalHaber").textContent = haberTotal.toFixed(2);
+        }
+
+        function agregarFila() {
+            var table = document.querySelector("table tbody");
+            var newRow = document.createElement("tr");
+
+            newRow.innerHTML = `
+                <td>
+                    <select>
+                        <option value="codigo1">Código 1</option>
+                        <option value="codigo2">Código 2</option>
+                        <option value="codigo3">Código 3</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option value="nombre1">Nombre 1</option>
+                        <option value="nombre2">Nombre 2</option>
+                        <option value="nombre3">Nombre 3</option>
+                    </select>
+                </td>
+                <td><input class="debe" type="number" oninput="calcularTotal()" /></td>
+                <td><input class="haber" type="number" oninput="calcularTotal()" /></td>
+            `;
+
+            table.appendChild(newRow);
+        }
+    </script>
 </head>
 <body>
-  <label>Ingresa Codigo</label>
-  <button onclick="mostrarInput1()">Sí</button>
-  <button onclick="ocultarInput1()">No</button>
-  <div class="input-container1">
-  <label>Ingresa tus datos:</label>
-  <input type="text" id="datosInput1">
-  <button onclick="guardarDatos1()">Guardar</button>
-  </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Debe</th>
+                <th>Haber</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select>
+                        <option value="codigo1">Código 1</option>
+                        <option value="codigo2">Código 2</option>
+                        <option value="codigo3">Código 3</option>
+                    </select>
+                </td>
+                <td>
+                    <select>
+                        <option value="nombre1">Nombre 1</option>
+                        <option value="nombre2">Nombre 2</option>
+                        <option value="nombre3">Nombre 3</option>
+                    </select>
+                </td>
+                <td><input class="debe" type="number" oninput="calcularTotal()" /></td>
+                <td><input class="haber" type="number" oninput="calcularTotal()" /></td>
+            </tr>
+        </tbody>
+    </table>
 
-  <label>Ingresa Cuenta</label>
-  <button onclick="mostrarInput2()">Sí</button>
-  <button onclick="ocultarInput2()">No</button>
-  <div class="cuenta">
-  <label>Ingresa tus datos:</label>
-  <input type="text" id="cuenta">
-  <button onclick="guardarDatos2()">Guardar</button>
-  </div>
-    <table id="tablaDatos">
-    <tr>
-      <th>Codigo</th>
-      <th>Cuenta</th>
-      <th>Parciales</th>
-      <th>Debe</th>
-      <th>Haber</th>
-    </tr>
-  </table>
-  <script>
-function mostrarInput1() {
-  document.querySelector('.input-container1').style.display = 'block';
-}
+    <button onclick="agregarFila()">Agregar Fila</button>
 
-function ocultarInput1() {
-  document.querySelector('.input-container1').style.display = 'none';
-}
-
-function guardarDatos1() {
-  var datos = document.getElementById('datosInput1').value;
-  console.log('Datos ingresados:', datos);
-
-  // Agregar los datos ingresados a la tabla
-  var tabla = document.getElementById('tablaDatos');
-  var fila = tabla.insertRow();
-  for (var i = 0; i < 1; i++) {
-    var celda = fila.insertCell();
-    celda.textContent = datos;
-  }
-  fila.cells[1].textContent = datos; // Cuenta
-}
-
-function mostrarInput2() {
-  document.querySelector('.cuenta').style.display = 'block';
-}
-
-function ocultarInput2() {
-  document.querySelector('.cuenta').style.display = 'none';
-}
-
-function guardarDatos2() {
-  var cuenta = document.getElementById('cuenta').value;
-  console.log('Datos ingresados:', cuenta);
-
-  // Agregar los datos ingresados a la tabla
-  var tabla = document.getElementById('tablaDatos');
-  var fila = tabla.insertRow();
-  for (var i = 2; i < 3; i++) {
-    var celda = fila.insertCell();
-    celda.textContent = cuenta;
-  }
-  fila.cells[2].textContent = cuenta; // Cuenta
-}
-
-</script>
- <script src="main.js" charset =utf-8></script>
+    <p>Total Debe: <span id="totalDebe">0.00</span></p>
+    <p>Total Haber: <span id="totalHaber">0.00</span></p>
 </body>
 </html>
